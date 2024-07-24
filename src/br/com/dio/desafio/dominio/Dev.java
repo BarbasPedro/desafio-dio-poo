@@ -2,6 +2,7 @@ package br.com.dio.desafio.dominio;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
@@ -11,11 +12,30 @@ public class Dev {
     private Set<Conteudo> conteudosIncritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
 
-    public void inscreverBootcamp(Bootcamp bootcamp) {}
+    public void inscreverBootcamp(Bootcamp bootcamp) {
+        // Quando se inscrever num Bootcamp, inserir todos os conteudos do Bootcamp no Set de conteudos inscritos
+        this.conteudosIncritos.addAll(bootcamp.getConteudos());
+        // Quando se inscrever adicionar este Dev ao Set DevsIncritos do Bootcamp
+        bootcamp.getDevsInscritos().add(this);
+    }
 
-    public void progredir() {}
+    public double progredir() {
+       Optional<Conteudo> conteudo = this.conteudosIncritos.stream().findFirst();
+       // Se houver conteudos
+       if (conteudo.isPresent()) {
+           // Dos ConteudosInscritos removemos o conteudo e adicionamos a Conteudos Concluidos
+           this.conteudosIncritos.remove(conteudo.get());
+           this.conteudosConcluidos.add(conteudo.get());
+        } else {
+           System.err.println("Você não está inscrito em nenhum curso ou mentoria");
+       }
 
-    public void calcularTotalXp{}
+    public double calcularTotalXp{
+           return this.conteudosIncritos
+                   .stream()
+                   .mapToDouble(Conteudo::calcularXp)
+                   .sum();
+    }
 
     public String getNome() {
         return nome;
