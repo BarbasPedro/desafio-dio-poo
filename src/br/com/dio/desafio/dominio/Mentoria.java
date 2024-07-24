@@ -8,9 +8,7 @@ public class Mentoria extends Conteudo{
     private LocalDate data;
 
     @Override
-    public double calcularXp() {
-        return XP_PADRAO + 20;
-    }
+    public double calcularXp() { return XP_PADRAO + 20d; }
 
     public void setData(LocalDate data) {
         this.data = LocalDate.from(data.atStartOfDay());

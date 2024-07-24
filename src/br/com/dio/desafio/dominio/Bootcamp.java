@@ -1,6 +1,7 @@
 package br.com.dio.desafio.dominio;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -8,8 +9,8 @@ import java.util.Set;
 public class Bootcamp {
     private String nome;
     private String descricao;
-    private final LocalDate dataInicio = LocalDate.now();
-    private final LocalDate dataFinal = dataInicio.plusDays(45);
+    private final LocalDate dataInicial = LocalDate.now();
+    private final LocalDate dataFinal = dataInicial.plusDays(45);
     // HashSet porque não quero alunos repetidos e a ordem de entrada não será importante
     private Set<Dev> devsInscritos = new HashSet<>();
     // LinkedHashSet porque não quero conteudos repetidos mas a ordem de entrada será importante
@@ -32,7 +33,7 @@ public class Bootcamp {
     }
 
     public LocalDate getDataInicio() {
-        return dataInicio;
+        return dataInicial;
     }
 
     public LocalDate getDataFinal() {
@@ -60,11 +61,11 @@ public class Bootcamp {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bootcamp bootcamp = (Bootcamp) o;
-        return Objects.equals(nome, bootcamp.nome) && Objects.equals(descricao, bootcamp.descricao) && Objects.equals(dataInicio, bootcamp.dataInicio) && Objects.equals(dataFinal, bootcamp.dataFinal) && Objects.equals(devsInscritos, bootcamp.devsInscritos) && Objects.equals(conteudos, bootcamp.conteudos);
+        return Objects.equals(nome, bootcamp.nome) && Objects.equals(descricao, bootcamp.descricao) && Objects.equals(dataInicial, bootcamp.dataInicial) && Objects.equals(dataFinal, bootcamp.dataFinal) && Objects.equals(devsInscritos, bootcamp.devsInscritos) && Objects.equals(conteudos, bootcamp.conteudos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, descricao, dataInicio, dataFinal, devsInscritos, conteudos);
+        return Objects.hash(nome, descricao, dataInicial, dataFinal, devsInscritos, conteudos);
     }
 }
